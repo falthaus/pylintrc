@@ -1,35 +1,44 @@
 # pylintrc
 #
-# plyint Configuration File
+# pylint configuration file
+# Example here: https://github.com/pylint-dev/pylint/blob/main/pylintrc
 #
 # Felix Althaus
 # 24.02.2024
 
 
 
+[MAIN]
+
+# A "no-member" (E1101) error may occur because pylint would need to load a C
+# extension module but is refraining to do so. Importing C extensions is a
+# security risk and could introduce malicious code, and has thus been disabled
+# by default. Trusted packages or models can be white-listed with
+# 'extension-pkg-allow-list' to work around this issue.
+# This is a comma-separated list of package or module names from where C
+# extensions may be loaded. Again, extensions are loaded into the active Python
+# interpreter and may run arbitrary code!
+extension-pkg-allow-list=pygame,cv2
+
+
+
 [MESSAGES CONTROL]
 
 # Disable the message, report, category or checker with the given id(s).
-#
-#
-# Disable the following:
-# - C0103: "Constant name "..." doesn't conform to UPPER_CASE naming style (invalid-name)"
-# - C0209: "Formatting a regular string which could be a f-string (consider-using-f-string)"
-# - R0903: "Too few public methods (1/2) (too-few-public-methods)"
-# - R0914: "Too many local variables (...) (too-many-locals)"
-# - R0902: "Too many instance attributes (...") (too-many-instance-attributes)"
-
-disable=C0103, C0209, R0903, R0914, R0902
+disable=
+        invalid-name,
+        consider-using-f-string,
+        too-few-public-methods,
+        too-many-locals,
+        too-many-instance-attributes
 
 
 
-# A "no-member" (E1101) error may occur because pylint would need to load a C extension module
-# but is refraining to do so. Importing C extensions is a security risk and could introduce
-# malicious code, and has thus been disabled by default.
-# Trusted packages or models can be white-listed with 'extension-pkg-whitelist'
-# to work around this issue.
-# The same does not seem to work with cv2, here generated attributes have to be specified
-# with 'generated-members'
+[TYPECHECK]
 
-extension-pkg-whitelist=pygame,cv2
+# The 'extension-pkg-allow-list' approach does not seem to work with cv2, here
+# generated attributes have to be specified with 'generated-members'.
+# This is a list of members which are set dynamically and missed by pylint
+# inference system, and so shouldn't trigger E1101 when accessed.
+# Python regular expressions are accepted.
 generated-members=cv2.*
