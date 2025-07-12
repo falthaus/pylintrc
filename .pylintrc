@@ -4,7 +4,7 @@
 # Example here: https://github.com/pylint-dev/pylint/blob/main/pylintrc
 #
 # Felix Althaus
-# 24.02.2024
+# 12.07.2025
 
 
 
@@ -30,7 +30,8 @@ disable=
         consider-using-f-string,
         too-few-public-methods,
         too-many-locals,
-        too-many-instance-attributes
+        too-many-instance-attributes,
+        no-else-return
 
 
 
